@@ -72,3 +72,20 @@ if (a === 70 || b === 40) {
 
 //Ternary operator
 console.log(val === 45 ? 'Correct' : 'Incorrect');
+
+//Switch statement
+const color = 'red';
+
+switch (color) {
+  case 'red':
+    console.log('Red');
+    break;
+
+  case 'blue':
+    console.log('Blue');
+    break;
+
+  default:
+    console.log('Neither Red nor Blue');
+    break;
+}
