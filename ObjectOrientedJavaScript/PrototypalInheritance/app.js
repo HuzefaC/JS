@@ -1,0 +1,35 @@
+// Person Constructor
+function Person(firstName, lastName) {
+  this.firstName = firstName;
+  this.lastName = lastName;
+}
+
+// Greeting
+Person.prototype.greeting = function () {
+  return `Hello there ${this.firstName}, ${this.lastName}`;
+};
+
+const person1 = new Person('John', 'Doe');
+
+console.log(person1.greeting());
+
+// Customer constructor
+function Customer(firstName, lastName, phone, membership) {
+  Person.call(this, firstName, lastName);
+
+  this.phone = phone;
+  this.membership = membership;
+}
+// Inherit Person prototype methods to Customer prototype
+Customer.prototype = Object.create(Person.prototype);
+
+// Make Customer.prototype return Customer
+Customer.prototype.constructor = Customer;
+
+const customer1 = new Customer('Tom', 'Swayer', 12345, 'Gold');
+
+console.log(customer1);
+
+console.log(customer1.greeting());
+
+// Using Object.create()
