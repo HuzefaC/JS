@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "name": "John Doe",
+    "amount": 5000
+  },
+  {
+    "id": 2,
+    "name": "Jonjo Shelvy",
+    "amount": 5500
+  },
+  {
+    "id": 3,
+    "name": "John Cena",
+    "amount": 4000
+  },
+  {
+    "id": 4,
+    "name": "Jack Sparrow",
+    "amount": 6000
+  },
+  {
+    "id": 5,
+    "name": "Joker",
+    "amount": 2000
+  }
+]
