@@ -1,50 +1,43 @@
 // JSON stands for JavaScript Object Notation
 
-document.getElementById('button1').addEventListener('click', loadCustomer);
-document.getElementById('button2').addEventListener('click', loadCustomers);
+document.querySelector('.get-jokes').addEventListener('click', getJokes);
 
-function loadCustomer(e) {
+function getJokes(e) {
+  const number = document.querySelector('input[type = "number"]').value;
   const xhr = new XMLHttpRequest();
 
-  xhr.open('GET', 'customer.json', true);
+  xhr.open('GET', `http://api.icndb.com/jokes/random/${number}`, true);
 
   xhr.onload = function () {
     if (this.status === 200) {
-      //console.log(this.responseText);
+      let output = [];
+      const response = JSON.parse(this.responseText);
+      let jokes = response.value;
 
-      const customer = JSON.parse(this.responseText);
-      const output = `<ul>
-        <li>ID: ${customer.id}</li>
-        <li>ID: ${customer.name}</li>
-        <li>ID: ${customer.amount}</li>
-      </ul>`;
-      document.getElementById('customer').innerHTML = output;
+      console.log(jokes.joke);
+
+      if (response.type === 'success') {
+        if (number > 1) {
+          jokes.forEach((joke) => {
+            output += `<li>${joke.joke}</li>`;
+          });
+          document.querySelector('.jokes').innerHTML = output;
+        } else {
+          output += `<li>${jokes.joke}</li>`;
+          document.querySelector('.jokes').innerHTML = output;
+        }
+      } else {
+        output += 'Something went wrong';
+      }
+
+      document.querySelector('.jokes').innerHTML = output;
     }
   };
 
-  xhr.send();
-}
-
-function loadCustomers(e) {
-  const xhr = new XMLHttpRequest();
-
-  xhr.open('GET', 'customers.json', true);
-
-  xhr.onload = function () {
-    if (this.status === 200) {
-      //console.log(this.responseText);
-      let output;
-      const customers = JSON.parse(this.responseText);
-      customers.forEach((customer) => {
-        output += `<ul>
-        <li>ID: ${customer.id}</li>
-        <li>ID: ${customer.name}</li>
-        <li>ID: ${customer.amount}</li>
-      </ul>`;
-      });
-      document.getElementById('customers').innerHTML = output;
-    }
+  xhr.onerror = function () {
+    console.log('Some error...');
   };
 
   xhr.send();
+  e.preventDefault();
 }
