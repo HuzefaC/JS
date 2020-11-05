@@ -1,4 +1,4 @@
-const http = new easyHttp();
+const http = new EasyHttp();
 
 // GET POSTS
 // http.get('https://jsonplaceholder.typicode.com/posts', function (
