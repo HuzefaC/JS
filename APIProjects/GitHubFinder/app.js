@@ -10,19 +10,20 @@ searchUser.addEventListener('keyup', (e) => {
   // Get User search query
   const userText = e.target.value;
 
-  if (userText !== '' || userText !== null) {
+  if (userText !== '') {
     // Make a http call
     gitHub.getUser(userText).then((data) => {
       if (data.profileData.message === 'Not Found') {
         // Show alert
-        //ui.alert(data.profileData);
-        console.log(data);
+        ui.showAlert('User not found', 'alert alert-danger');
       } else {
         // Show Profile
         ui.showProfile(data.profileData);
+        ui.showRepos(data.repoData);
       }
     });
   } else {
     // Clear Profile
+    ui.clearProfile();
   }
 });

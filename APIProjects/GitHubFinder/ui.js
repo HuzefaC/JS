@@ -3,6 +3,7 @@ class UI {
     this.profile = document.getElementById('profile');
   }
 
+  // Display profile
   showProfile(user) {
     this.profile.innerHTML = `
       <div class="card card-body mb-3">
@@ -31,5 +32,60 @@ class UI {
       <h3 class="page-heading mb-3">Latest Repos</h3>
       <div id="repos"></div>
     `;
+  }
+
+  showRepos(repos) {
+    let output = '';
+    console.log(repos);
+    if (repos !== null) {
+      repos.forEach((repo) => {
+        output += `<div class="card card-body mb-2">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <a href="${repo.html_url}" target="_blank">${repo.name}</a>
+                      </div>
+                      <div class="col-md-6">
+                        <span class="bage badge-primary">Stars: ${repo.stargazers_count}</span>
+                        <span class="bage badge-secondary">Watchers: ${repo.watchers_count}</span>
+                        <span class="bage badge-success">Forks: ${repo.forks_count}</span> 
+                      </div>
+                    </div>
+                </div>
+      `;
+      });
+    }
+
+    document.getElementById('repos').innerHTML = output;
+  }
+
+  clearAlert() {
+    const currentAlert = document.querySelector('.alert');
+
+    if (currentAlert) {
+      currentAlert.remove();
+    }
+  }
+
+  // Show alert message
+  showAlert(message, className) {
+    this.clearAlert();
+    // Create div
+    const div = document.createElement('div');
+    div.className = className;
+    div.textContent = message;
+
+    const container = document.querySelector('.searchContainer');
+    const search = document.querySelector('.search');
+    container.insertBefore(div, search);
+
+    // Timeout after 3 secs
+    setTimeout(() => {
+      this.clearAlert();
+    }, 3000);
+  }
+
+  // Clear profile
+  clearProfile() {
+    this.profile.innerHTML = '';
   }
 }
