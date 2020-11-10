@@ -1,31 +1,48 @@
-let regex;
+// Adding event listeners
+document.getElementById('name').addEventListener('blur', validateName);
+document.getElementById('zipcode').addEventListener('blur', validateZipcode);
+document.getElementById('email').addEventListener('blur', validateEmail);
+document.getElementById('phone').addEventListener('blur', validatePhoneNumber);
 
-regex = /hello/i; // i flag makes the expression case insensitive
+function validateName() {
+  const name = document.getElementById('name');
+  const regex = /^[a-zA-Z]{2,10}$/;
 
-console.log(regex);
-console.log(regex.source);
+  if (!regex.test(name.value)) {
+    name.classList.add('is-invalid');
+  } else {
+    name.classList.remove('is-invalid');
+  }
+}
 
-// exec() - Finds the regex pattern in the input string and returns result in an array or null
-const result = regex.exec('hello world');
+function validateZipcode() {
+  const zip = document.getElementById('zipcode');
+  const regex = /^[0-9]{5}(-[0-9]{4})?$/;
 
-console.log(result);
-console.log(result[0]);
-console.log(result.index);
-console.log(result.input);
+  if (!regex.test(zip.value)) {
+    zip.classList.add('is-invalid');
+  } else {
+    zip.classList.remove('is-invalid');
+  }
+}
+function validateEmail() {
+  console.log('In');
+  const email = document.getElementById('email');
+  const regex = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2-5})$/;
 
-// test() - Returns true or false
-const test = regex.test('hello world');
+  if (!regex.test(email.value)) {
+    email.classList.add('is-invalid');
+  } else {
+    email.classList.remove('is-invalid');
+  }
+}
+function validatePhoneNumber() {
+  const phone = document.getElementById('phone');
+  const regex = /^[0-9]{10,12}$/;
 
-console.log(test);
-
-// returns result array or null
-const match = 'Hello there'.match(regex);
-console.log(match);
-
-// returns the index of the first match if not found returns -1
-const search = '   Hello there'.search(regex);
-console.log(search);
-
-// returns new string with some or all matches of a pattern
-const replace = 'Hello there'.replace(regex, 'hi');
-console.log(replace);
+  if (!regex.test(phone.value)) {
+    phone.classList.add('is-invalid');
+  } else {
+    phone.classList.remove('is-invalid');
+  }
+}
