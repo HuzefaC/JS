@@ -1,31 +1,44 @@
 let regex;
 
+// Literal characters
+regex = /hello/;
 regex = /hello/i; // i flag makes the expression case insensitive
 
-console.log(regex);
-console.log(regex.source);
+// Metacharacters Symbols
+regex = /^h/i; // Must start with h
+regex = /d$/i; // Must end with d
+regex = /^hello$/i; // Must start and end with
+regex = /h.llo$/i; // Matches any ONE character
+regex = /h*o/i; // Matches any character
+regex = /gre?a?y/i; // Optional character
+regex = /gre?a?y\?/i; // Escape characters
 
-// exec() - Finds the regex pattern in the input string and returns result in an array or null
-const result = regex.exec('hello world');
+// Brackets [] - Character sets
+regex = /gr[ae]y/i; // Must be an a or e
+regex = /[GF]r[ae]y/; // Must be an a or e
+regex = /gr[ae]y/i; // Must be an G or F
+regex = /[A-Z]ray/i; // Mathces any Uppercase
+regex = /[a-z]ray/i; // Mathces any Lowecase
+regex = /[A-Za-z]ray/i; // Mathces any case
+regex = /[0-9]ray/i; // Mathces any digits
 
-console.log(result);
-console.log(result[0]);
-console.log(result.index);
-console.log(result.input);
+// Braces {} - Quantifiers
+regex = /Hel{2}o/i; // Letter before must {} occur {m} times
+regex = /Hel{2,4}o/i; // Letter before must {} occur {m} times
+regex = /Hel{2, }o/i; // Letter before must occur atleast {m} times
 
-// test() - Returns true or false
-const test = regex.test('hello world');
+// Paranthesis - Used for Grouping
+regex = /([0-9]x){3}/i; // Number between 0-9 followed by x three times
 
-console.log(test);
+const str = '3x3x3x';
+//const result = ;
 
-// returns result array or null
-const match = 'Hello there'.match(regex);
-console.log(match);
+function regexTest(regex, str) {
+  if (regex.test(str)) {
+    console.log(`${str} matches ${regex.source}`);
+  } else {
+    console.log(`${str} does not match ${regex.source}`);
+  }
+}
 
-// returns the index of the first match if not found returns -1
-const search = '   Hello there'.search(regex);
-console.log(search);
-
-// returns new string with some or all matches of a pattern
-const replace = 'Hello there'.replace(regex, 'hi');
-console.log(replace);
+regexTest(regex, str);
